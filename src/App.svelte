@@ -1,30 +1,45 @@
 <script>
-	export let name;
+	import FeedbackList from "./components/FeedbackList.svelte";
+
+	let feedback = [
+    { 
+			id: 1, 
+			text: "Your performance has been consistently outstanding. Keep up the excellent work!", 
+			rating: 10 
+
+		},
+    { 
+			id: 2, 
+			text: "While there is room for improvement, your effort is commendable. Focus on refining your skills. Great potential!", rating: 4 
+		},
+    { 
+			id: 3, 
+			text: "Exceptional effort and dedication! Your commitment to excellence is truly impressive. Solid 9 out of 10!", 
+			rating: 9 
+		},
+    { 
+			id: 4, 
+			text: "Congratulations on a job well done! Your accomplishments are a testament to your hard work. Perfect 5-star performance!", rating: 10 
+		},
+    { 
+			id: 5, 
+			text: "Your progress is remarkable. Keep pushing boundaries and striving for success! Impressive 6 rating!", 
+			rating: 6 }
+];
+
+
+
+const deleteFeedback = (e) => {
+	const itemId = e.detail;
+	feedback = feedback.filter(item => item.id != itemId);
+}
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+<main class="container">
+	<FeedbackList feedback={feedback} on:delete-feedback={deleteFeedback} />
+	
 </main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+	
 </style>
