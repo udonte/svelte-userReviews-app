@@ -33,6 +33,11 @@
 	return total + rating / feedback.length;
 }, 0)
 
+const addFeedback = (e) => {
+	const newFeedback = e.detail;
+	feedback = [newFeedback, ...feedback];
+
+}
 
 const deleteFeedback = (e) => {
 	const itemId = e.detail;
@@ -41,9 +46,9 @@ const deleteFeedback = (e) => {
 </script>
 
 <main class="container">
-	<FeedbackForm />
+	<FeedbackForm on:add-feedback={addFeedback} />
 	<FeedbackStats count={count} average={average} />
-	<FeedbackList feedback={feedback} on:delete-feedback={deleteFeedback} />
+	<FeedbackList on:delete-feedback={deleteFeedback} />
 	
 </main>
 

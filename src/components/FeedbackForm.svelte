@@ -1,7 +1,11 @@
 <script>
+  import {v4 as uuidv4} from 'uuid';
   import Card from "./Card.svelte";
+  import {createEventDispatcher} from 'svelte';
   import Button from "./Button.svelte";
   import RatingSelect from "./RatingSelect.svelte";
+
+  const dispatch = createEventDispatcher();
 
   let btnDisabled = false;
   let text = "";
@@ -20,6 +24,20 @@
       btnDisabled = false;
     }
   }
+
+  const handleSubmit = () => {
+    if(text.trim().length > min){
+      const newFeedback = {
+        id: uuidv4(),
+        text,
+        rating: +rating
+      }
+
+      dispatch('add-feedback', newFeedback);
+      text = '';
+    }
+  }
+
 </script>
 
 <Card>
@@ -28,11 +46,11 @@
   </header>
   
   <RatingSelect on:rating-select={handleSelect} />
-  <form >
+  <form on:submit|preventDefault={handleSubmit} >
     <!-- Rating Select -->
     
     <div class="input-group">
-      <input on:input={handleInput} type="text" bind:value={text} placeholder="Tell us something that keeps you coming back..">
+      <input on:input={handleInput} type="text" bind:value={text} placeholder="Tell us something that keeps you coming back.."> 
       <Button disabled={btnDisabled} type="submit">Send</Button>
     </div>
 
@@ -45,6 +63,8 @@
 </Card> 
 
 <style>
+
+
   header {
     max-width: 400px;
     margin: auto;
@@ -78,9 +98,8 @@
   }
 
   .message{
-    padding-top: 7px;
     text-align: center;
-    color: black;
     font-size: 12px;
+    color: red;
   }
 </style>

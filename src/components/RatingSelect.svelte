@@ -6,7 +6,6 @@
   let selected = 10;
   
   const onChange = (e) => {
-    console.log(e);
     selected = e.currentTarget.value;
     dispatch('rating-select', selected)
   }

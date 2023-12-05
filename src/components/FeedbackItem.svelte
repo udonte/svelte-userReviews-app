@@ -8,6 +8,9 @@
   const handleDelete = (itemId) =>{
     dispatch('delete-feedback', itemId);
   }
+
+ 
+
 </script>
 
 <Card>
