@@ -8,8 +8,13 @@
 	<FeedbackForm />
 	<FeedbackStats />
 	<FeedbackList  />
+
+	<p>Built with Svelte in 2023 ⭐</p>
 </main>
 
 <style>
-	
+	p {
+		text-align: center;
+		margin-top: 100px;
+	}
 </style>
